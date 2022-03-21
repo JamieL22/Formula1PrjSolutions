@@ -1,6 +1,6 @@
 # Formula1_DBX_Project
 
-Here a solution architecture for a data engineering solution using Azure Databricks, Azure Data Lake Gen2, Azure Data Factory and Power BI is built.
+Here a solution architecture using Azure Databricks, Azure Data Lake Gen2, Azure Data Factory and Power BI is built.
 A Cloud Data platform is created from Formula 1 Racing Data. This Data will be ingested and transformed using Databricks, Pyspark, Spark SQL and Storage Solutions like Azure Data Lake. Furthermore the Data is made available for BI in Microsoft Power BI.
 
 
