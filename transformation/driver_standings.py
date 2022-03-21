@@ -3,7 +3,13 @@
 
 # COMMAND ----------
 
-race_results_df = spark.read.parquet(f"{presentation_folder_path}/race_results")
+dbutils.widgets.text("file_date", "2021-03-21")
+
+file_date = dbutils.widgets.get("file_date")
+
+# COMMAND ----------
+
+race_results_df = spark.read.parquet(f"{presentation_folder_path}/{file_date}/race_results")
 
 # COMMAND ----------
 
@@ -39,7 +45,7 @@ display(driver_standings_final.filter("race_year = 2020"))
 
 # COMMAND ----------
 
-driver_standings_final.write.mode("overwrite").parquet(f"{presentation_folder_path}/driver_standings")
+driver_standings_final.write.mode("overwrite").parquet(f"{presentation_folder_path}/{file_date}/driver_standings")
 
 # COMMAND ----------
 

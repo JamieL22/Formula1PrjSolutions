@@ -1,5 +1,5 @@
 -- Databricks notebook source
-USE f1_processed
+CREATE DATABASE IF NOT EXISTS f1_presentation
 
 -- COMMAND ----------
 

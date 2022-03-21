@@ -8,7 +8,13 @@ from pyspark.sql.window import Window
 
 # COMMAND ----------
 
-race_results_df = spark.read.parquet(f"{presentation_folder_path}/race_results")
+dbutils.widgets.text("file_date", "2021-03-21")
+
+file_date = dbutils.widgets.get("file_date")
+
+# COMMAND ----------
+
+race_results_df = spark.read.parquet(f"{presentation_folder_path}/{file_date}/race_results")
 
 # COMMAND ----------
 
@@ -38,9 +44,13 @@ display(constructors_final.filter("race_year = 2020"))
 
 # COMMAND ----------
 
-constructors_final.write.format("overwrite").parquet(f"{presentation_folder_path}/constructors")
+constructors_final.write.format("overwrite").parquet(f"{presentation_folder_path}/{file_date}/constructors")
 
 # COMMAND ----------
 
-constructors_final.write.format("overwrite").format("parquet").\
+constructors_final.write.mode("append").format("parquet").\
 saveAsTable("f1_presentation.constructors")
+
+# COMMAND ----------
+
+

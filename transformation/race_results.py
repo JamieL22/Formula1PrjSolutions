@@ -13,24 +13,24 @@ file_date = dbutils.widgets.get("file_date")
 
 # COMMAND ----------
 
-races = spark.read.parquet(f"{processed_folder_path}/races")\
+races = spark.read.parquet(f"{processed_folder_path}/{file_date}/races")\
 .withColumnRenamed("name", "race_name")\
 .withColumnRenamed("year", "race_year")\
 .withColumnRenamed("race_timestamp", "race_date")
 
-drivers = spark.read.parquet(f"{processed_folder_path}/drivers")\
+drivers = spark.read.parquet(f"{processed_folder_path}/{file_date}/drivers")\
 .withColumnRenamed("number", "driver_number")\
 .withColumnRenamed("name", "driver_name")\
 .withColumnRenamed("nationality", "driver_nationality")
 
-circuits = spark.read.parquet(f"{processed_folder_path}/circuits")\
+circuits = spark.read.parquet(f"{processed_folder_path}/{file_date}/circuits")\
 .withColumnRenamed("name", "circuits_name")\
 .withColumnRenamed("location", "circuit_location")
 
-constructors = spark.read.parquet(f"{processed_folder_path}/constructors")\
+constructors = spark.read.parquet(f"{processed_folder_path}/{file_date}/constructors")\
 .withColumnRenamed("name", "constructor_name")
 
-results = spark.read.parquet(f"{processed_folder_path}/results")\
+results = spark.read.parquet(f"{processed_folder_path}/{file_date}/results")\
 .withColumnRenamed("time", "race_time")
 
 # COMMAND ----------
@@ -80,9 +80,9 @@ display(abu_dhabi_2020.orderBy("points", ascending=False))
 
 # COMMAND ----------
 
-race_results_final.write.mode("overwrite").parquet(f"{presentation_folder_path}/race_results")
+race_results_final.write.mode("overwrite").parquet(f"{presentation_folder_path}/{file_date}/race_results")
 
 # COMMAND ----------
 
-race_results_final.write.mode("overwrite").format("parquet").\
+race_results_final.write.mode("append").format("parquet").\
 saveAsTable("f1_presentation.race_results")
